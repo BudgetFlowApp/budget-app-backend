@@ -1,12 +1,13 @@
 import { DepensesPrevuesService } from './depenses-prevues.service';
 import { CreateDepensesPrevueDto } from './dto/create-depenses-prevue.dto';
 import { UpdateDepensesPrevueDto } from './dto/update-depenses-prevue.dto';
+import { DepensesPrevue } from './entities/depenses-prevue.entity';
 export declare class DepensesPrevuesController {
     private readonly depensesPrevuesService;
     constructor(depensesPrevuesService: DepensesPrevuesService);
-    create(createDepensesPrevueDto: CreateDepensesPrevueDto): string;
-    findAll(): string;
-    findOne(id: string): string;
-    update(id: string, updateDepensesPrevueDto: UpdateDepensesPrevueDto): string;
-    remove(id: string): string;
+    create(createDepensesPrevueDto: CreateDepensesPrevueDto): Promise<DepensesPrevue>;
+    findAll(): Promise<DepensesPrevue[]>;
+    findOne(id: number): Promise<DepensesPrevue>;
+    update(id: number, updateDepensesPrevueDto: UpdateDepensesPrevueDto): Promise<DepensesPrevue>;
+    remove(id: number): Promise<DepensesPrevue>;
 }

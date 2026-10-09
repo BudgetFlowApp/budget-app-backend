@@ -10,13 +10,17 @@ exports.RevenusModule = void 0;
 const common_1 = require("@nestjs/common");
 const revenus_service_1 = require("./revenus.service");
 const revenus_controller_1 = require("./revenus.controller");
+const revenu_entity_1 = require("./entities/revenu.entity");
+const typeorm_1 = require("@nestjs/typeorm");
 let RevenusModule = class RevenusModule {
 };
 exports.RevenusModule = RevenusModule;
 exports.RevenusModule = RevenusModule = __decorate([
     (0, common_1.Module)({
+        imports: [typeorm_1.TypeOrmModule.forFeature([revenu_entity_1.Revenu])],
         controllers: [revenus_controller_1.RevenusController],
         providers: [revenus_service_1.RevenusService],
+        exports: [revenus_service_1.RevenusService]
     })
 ], RevenusModule);
 //# sourceMappingURL=revenus.module.js.map

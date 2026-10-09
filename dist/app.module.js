@@ -13,12 +13,28 @@ const app_service_1 = require("./app.service");
 const revenus_module_1 = require("./revenus/revenus.module");
 const depenses_reelles_module_1 = require("./depenses-reelles/depenses-reelles.module");
 const depenses_prevues_module_1 = require("./depenses-prevues/depenses-prevues.module");
+const typeorm_1 = require("@nestjs/typeorm");
+const config_1 = require("@nestjs/config");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [revenus_module_1.RevenusModule, depenses_reelles_module_1.DepensesReellesModule, depenses_prevues_module_1.DepensesPrevuesModule],
+        imports: [
+            config_1.ConfigModule.forRoot({ isGlobal: true }),
+            typeorm_1.TypeOrmModule.forRoot({
+                type: 'postgres',
+                url: process.env.DATABASE_URL,
+                ssl: {
+                    rejectUnauthorized: false,
+                },
+                synchronize: true,
+                autoLoadEntities: true,
+            }),
+            revenus_module_1.RevenusModule,
+            depenses_reelles_module_1.DepensesReellesModule,
+            depenses_prevues_module_1.DepensesPrevuesModule
+        ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
     })

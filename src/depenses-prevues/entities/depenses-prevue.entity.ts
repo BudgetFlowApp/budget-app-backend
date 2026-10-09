@@ -21,5 +21,5 @@ export class DepensesPrevue {
     description: string;     
 
     @Column()
-    montant: string; 
+    montant: number; 
 }

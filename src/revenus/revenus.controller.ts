@@ -1,34 +1,35 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Put } from '@nestjs/common';
 import { RevenusService } from './revenus.service';
 import { CreateRevenuDto } from './dto/create-revenu.dto';
 import { UpdateRevenuDto } from './dto/update-revenu.dto';
+import { Revenu } from './entities/revenu.entity';
 
 @Controller('revenus')
 export class RevenusController {
   constructor(private readonly revenusService: RevenusService) {}
 
   @Post()
-  create(@Body() createRevenuDto: CreateRevenuDto) {
+  create(@Body() createRevenuDto: CreateRevenuDto): Promise<Revenu> {
     return this.revenusService.create(createRevenuDto);
   }
 
-  @Get()
-  findAll() {
+  @Get('all')
+  findAll(): Promise<Revenu[]> {
     return this.revenusService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.revenusService.findOne(+id);
+  findOne(@Param('id') id: number): Promise<Revenu> {
+    return this.revenusService.findOne(id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateRevenuDto: UpdateRevenuDto) {
-    return this.revenusService.update(+id, updateRevenuDto);
+  @Put(':id')
+  update(@Param('id') id: number, @Body() updateRevenuDto: UpdateRevenuDto): Promise<Revenu> {
+    return this.revenusService.update(id, updateRevenuDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.revenusService.remove(+id);
+  remove(@Param('id') id: number): Promise<Revenu> {
+    return this.revenusService.remove(id);
   }
 }

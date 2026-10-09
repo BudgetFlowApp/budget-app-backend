@@ -10,11 +10,14 @@ exports.DepensesPrevuesModule = void 0;
 const common_1 = require("@nestjs/common");
 const depenses_prevues_service_1 = require("./depenses-prevues.service");
 const depenses_prevues_controller_1 = require("./depenses-prevues.controller");
+const typeorm_1 = require("@nestjs/typeorm");
+const depenses_prevue_entity_1 = require("./entities/depenses-prevue.entity");
 let DepensesPrevuesModule = class DepensesPrevuesModule {
 };
 exports.DepensesPrevuesModule = DepensesPrevuesModule;
 exports.DepensesPrevuesModule = DepensesPrevuesModule = __decorate([
     (0, common_1.Module)({
+        imports: [typeorm_1.TypeOrmModule.forFeature([depenses_prevue_entity_1.DepensesPrevue])],
         controllers: [depenses_prevues_controller_1.DepensesPrevuesController],
         providers: [depenses_prevues_service_1.DepensesPrevuesService],
     })

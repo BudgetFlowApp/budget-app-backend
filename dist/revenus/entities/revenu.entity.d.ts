@@ -3,5 +3,5 @@ export declare class Revenu {
     mois: string;
     categorie: string;
     sous_categorie: string;
-    montant: string;
+    montant: number;
 }

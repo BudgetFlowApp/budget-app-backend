@@ -21,5 +21,5 @@ export class DepensesReelle {
     description: string;     
 
     @Column()
-    montant: string; 
+    montant: number; 
 }

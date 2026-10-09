@@ -15,5 +15,5 @@ export class Revenu {
     sous_categorie: string; 
 
     @Column()
-    montant: string; 
+    montant: number; 
 }

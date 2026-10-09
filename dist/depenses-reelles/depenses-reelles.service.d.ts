@@ -1,9 +1,13 @@
 import { CreateDepensesReelleDto } from './dto/create-depenses-reelle.dto';
 import { UpdateDepensesReelleDto } from './dto/update-depenses-reelle.dto';
+import { DepensesReelle } from './entities/depenses-reelle.entity';
+import { Repository } from 'typeorm';
 export declare class DepensesReellesService {
-    create(createDepensesReelleDto: CreateDepensesReelleDto): string;
-    findAll(): string;
-    findOne(id: number): string;
-    update(id: number, updateDepensesReelleDto: UpdateDepensesReelleDto): string;
-    remove(id: number): string;
+    private readonly depensesReellesRepository;
+    constructor(depensesReellesRepository: Repository<DepensesReelle>);
+    create(createDepensesReelleDto: CreateDepensesReelleDto): Promise<DepensesReelle>;
+    findAll(): Promise<DepensesReelle[]>;
+    findOne(id: number): Promise<DepensesReelle>;
+    update(id: number, updateDepensesReelleDto: UpdateDepensesReelleDto): Promise<DepensesReelle>;
+    remove(id: number): Promise<DepensesReelle>;
 }

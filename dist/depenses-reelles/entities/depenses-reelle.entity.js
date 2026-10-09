@@ -40,7 +40,7 @@ __decorate([
 ], DepensesReelle.prototype, "description", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
-    __metadata("design:type", String)
+    __metadata("design:type", Number)
 ], DepensesReelle.prototype, "montant", void 0);
 exports.DepensesReelle = DepensesReelle = __decorate([
     (0, typeorm_1.Entity)()

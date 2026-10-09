@@ -1,9 +1,13 @@
 import { CreateDepensesPrevueDto } from './dto/create-depenses-prevue.dto';
 import { UpdateDepensesPrevueDto } from './dto/update-depenses-prevue.dto';
+import { DepensesPrevue } from './entities/depenses-prevue.entity';
+import { Repository } from 'typeorm';
 export declare class DepensesPrevuesService {
-    create(createDepensesPrevueDto: CreateDepensesPrevueDto): string;
-    findAll(): string;
-    findOne(id: number): string;
-    update(id: number, updateDepensesPrevueDto: UpdateDepensesPrevueDto): string;
-    remove(id: number): string;
+    private readonly depensesPrevuesRepository;
+    constructor(depensesPrevuesRepository: Repository<DepensesPrevue>);
+    create(createDepensesPrevueDto: CreateDepensesPrevueDto): Promise<DepensesPrevue>;
+    findAll(): Promise<DepensesPrevue[]>;
+    findOne(id: number): Promise<DepensesPrevue>;
+    update(id: number, updateDepensesPrevueDto: UpdateDepensesPrevueDto): Promise<DepensesPrevue>;
+    remove(id: number): Promise<DepensesPrevue>;
 }

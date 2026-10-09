@@ -32,7 +32,7 @@ __decorate([
 ], Revenu.prototype, "sous_categorie", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
-    __metadata("design:type", String)
+    __metadata("design:type", Number)
 ], Revenu.prototype, "montant", void 0);
 exports.Revenu = Revenu = __decorate([
     (0, typeorm_1.Entity)()

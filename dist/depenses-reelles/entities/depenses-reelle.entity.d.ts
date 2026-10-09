@@ -5,5 +5,5 @@ export declare class DepensesReelle {
     categorie: string;
     sous_categorie: string;
     description: string;
-    montant: string;
+    montant: number;
 }
