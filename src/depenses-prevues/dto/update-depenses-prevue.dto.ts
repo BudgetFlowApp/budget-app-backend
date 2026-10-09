@@ -4,6 +4,10 @@ import { IsIn, IsNumber, IsString, MaxLength, Min } from 'class-validator';
 import { Type } from 'class-transformer';
 
 export class UpdateDepensesPrevueDto extends PartialType(CreateDepensesPrevueDto) {
+    @Type(() => Number)
+    @IsNumber()
+    annee: number; 
+        
     @IsString()
     @MaxLength(25)
     mois: string; 

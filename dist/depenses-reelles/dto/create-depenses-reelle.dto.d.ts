@@ -1,4 +1,5 @@
 export declare class CreateDepensesReelleDto {
+    annee: number;
     mois: string;
     categorie: string;
     type: string;

@@ -23,6 +23,7 @@ let RevenusService = class RevenusService {
     }
     async create(createRevenuDto) {
         const lastRevenu = await this.revenuRepository.findOneBy({
+            annee: createRevenuDto.annee,
             mois: createRevenuDto.mois,
             sous_categorie: createRevenuDto.sous_categorie,
         });
@@ -50,6 +51,9 @@ let RevenusService = class RevenusService {
         });
         if (!revenu) {
             throw new common_1.NotFoundException(`Revenu with id ${id} not found`);
+        }
+        if (updateRevenuDto.annee !== undefined && updateRevenuDto.annee !== null) {
+            revenu.annee = updateRevenuDto.annee;
         }
         if (updateRevenuDto.mois !== undefined && updateRevenuDto.mois !== '') {
             revenu.mois = updateRevenuDto.mois;

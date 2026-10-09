@@ -16,6 +16,11 @@ class CreateRevenuDto {
 }
 exports.CreateRevenuDto = CreateRevenuDto;
 __decorate([
+    (0, class_transformer_1.Type)(() => Number),
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], CreateRevenuDto.prototype, "annee", void 0);
+__decorate([
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.MaxLength)(25),
     __metadata("design:type", String)

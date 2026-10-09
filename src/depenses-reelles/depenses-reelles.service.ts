@@ -12,12 +12,13 @@ export class DepensesReellesService {
   ) {}  
   async create(createDepensesReelleDto: CreateDepensesReelleDto): Promise<DepensesReelle> {
     const lastDepenseReelle = await this.depensesReellesRepository.findOneBy({
+      annee: createDepensesReelleDto.annee,
       mois: createDepensesReelleDto.mois,
-      sous_categorie: createDepensesReelleDto.sous_categorie,
+      categorie: createDepensesReelleDto.categorie,
     });
     if (lastDepenseReelle) {
       throw new NotFoundException(
-        `DepensePrevue with mois ${createDepensesReelleDto.mois} and sous_categorie ${createDepensesReelleDto.sous_categorie} already exists`,
+        `DepensePrevue with mois ${createDepensesReelleDto.mois} and categorie ${createDepensesReelleDto.categorie} already exists`,
       );    
     } 
     const newDepenseReelle = this.depensesReellesRepository.create(createDepensesReelleDto);
@@ -34,6 +35,18 @@ export class DepensesReellesService {
     });
   }
 
+  findByAnneeMoisCategorie(annee: number, mois: string, categorie: string): Promise<DepensesReelle> {
+    const lastDepenseReelle = this.depensesReellesRepository.findOneBy({
+      annee: annee,
+      mois: mois,
+      categorie: categorie
+    });
+    if (!lastDepenseReelle) {
+      throw new NotFoundException(`DepenseReelle with categorie ${categorie} not found`);
+    }
+    return lastDepenseReelle;
+  }  
+
   async update(id: number, updateDepensesReelleDto: UpdateDepensesReelleDto): Promise<DepensesReelle> {
     const depenseReelle = await this.depensesReellesRepository.findOneBy({
       idDepenseReelle: id
@@ -42,6 +55,9 @@ export class DepensesReellesService {
       throw new NotFoundException(
         `DepensePrevue with id ${id} not found`,
       );    
+    }
+    if (updateDepensesReelleDto.annee !== undefined && updateDepensesReelleDto.annee !== null) {
+      depenseReelle.annee = updateDepensesReelleDto.annee;
     }
     if (updateDepensesReelleDto.mois !== undefined && updateDepensesReelleDto.mois !== '') {
       depenseReelle.mois = updateDepensesReelleDto.mois;

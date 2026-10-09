@@ -6,6 +6,9 @@ export class DepensesPrevue {
     idDepensePrevue: number;
 
     @Column()
+    annee: number; 
+        
+    @Column()
     mois: string; 
 
     @Column()
@@ -20,6 +23,6 @@ export class DepensesPrevue {
     @Column()
     description: string;     
 
-    @Column()
+    @Column('float')
     montant: number; 
 }

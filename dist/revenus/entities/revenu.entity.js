@@ -20,6 +20,10 @@ __decorate([
 ], Revenu.prototype, "idRevenu", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
+    __metadata("design:type", Number)
+], Revenu.prototype, "annee", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], Revenu.prototype, "mois", void 0);
 __decorate([
@@ -31,7 +35,7 @@ __decorate([
     __metadata("design:type", String)
 ], Revenu.prototype, "sous_categorie", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
+    (0, typeorm_1.Column)('float'),
     __metadata("design:type", Number)
 ], Revenu.prototype, "montant", void 0);
 exports.Revenu = Revenu = __decorate([

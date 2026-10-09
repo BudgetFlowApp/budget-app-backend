@@ -1,5 +1,6 @@
 export declare class DepensesPrevue {
     idDepensePrevue: number;
+    annee: number;
     mois: string;
     type: string;
     categorie: string;

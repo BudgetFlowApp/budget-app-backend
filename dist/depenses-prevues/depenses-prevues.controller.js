@@ -30,6 +30,9 @@ let DepensesPrevuesController = class DepensesPrevuesController {
     findOne(id) {
         return this.depensesPrevuesService.findOne(id);
     }
+    findByAnneeMoisCategorie(annee, mois, categorie) {
+        return this.depensesPrevuesService.findByAnneeMoisCategorie(annee, mois, categorie);
+    }
     update(id, updateDepensesPrevueDto) {
         return this.depensesPrevuesService.update(id, updateDepensesPrevueDto);
     }
@@ -58,6 +61,15 @@ __decorate([
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
 ], DepensesPrevuesController.prototype, "findOne", null);
+__decorate([
+    (0, common_1.Get)('categorie/:annee/:mois/:categorie'),
+    __param(0, (0, common_1.Param)('annee')),
+    __param(1, (0, common_1.Param)('mois')),
+    __param(2, (0, common_1.Param)('categorie')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number, String, String]),
+    __metadata("design:returntype", Promise)
+], DepensesPrevuesController.prototype, "findByAnneeMoisCategorie", null);
 __decorate([
     (0, common_1.Put)(':id'),
     __param(0, (0, common_1.Param)('id')),

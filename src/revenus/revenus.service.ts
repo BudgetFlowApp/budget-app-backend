@@ -13,6 +13,7 @@ export class RevenusService {
 
   async create(createRevenuDto: CreateRevenuDto): Promise<Revenu> {
     const lastRevenu = await this.revenuRepository.findOneBy({
+      annee: createRevenuDto.annee,
       mois: createRevenuDto.mois,
       sous_categorie: createRevenuDto.sous_categorie,
     });
@@ -47,6 +48,9 @@ export class RevenusService {
     if (!revenu){
       throw new NotFoundException(`Revenu with id ${id} not found`);
     }
+    if (updateRevenuDto.annee !== undefined && updateRevenuDto.annee !== null) {
+      revenu.annee = updateRevenuDto.annee;
+    }
     if (updateRevenuDto.mois !== undefined && updateRevenuDto.mois !== '') {
       revenu.mois = updateRevenuDto.mois;
     }
@@ -70,7 +74,7 @@ export class RevenusService {
       throw new NotFoundException(`Revenu with id ${id} not found`);
     }
     await this.revenuRepository.delete({ idRevenu: id });
-    
+
     return revenu;
   }
 }

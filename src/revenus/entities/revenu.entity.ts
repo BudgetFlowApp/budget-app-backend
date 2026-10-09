@@ -6,6 +6,9 @@ export class Revenu {
     idRevenu: number;
 
     @Column()
+    annee: number; 
+
+    @Column()
     mois: string; 
 
     @Column()
@@ -14,6 +17,6 @@ export class Revenu {
     @Column()
     sous_categorie: string; 
 
-    @Column()
+    @Column('float')
     montant: number; 
 }

@@ -23,6 +23,11 @@ export class DepensesReellesController {
     return this.depensesReellesService.findOne(id);
   }
 
+  @Get('categorie/:annee/:mois/:categorie')
+  findByAnneeMoisCategorie(@Param('annee') annee: number, @Param('mois') mois: string, @Param('categorie') categorie: string): Promise<DepensesReelle> {
+    return this.depensesReellesService.findByAnneeMoisCategorie(annee, mois, categorie);
+  }
+
   @Put(':id')
   update(@Param('id') id: number, @Body() updateDepensesReelleDto: UpdateDepensesReelleDto): Promise<DepensesReelle> {
     return this.depensesReellesService.update(id, updateDepensesReelleDto);

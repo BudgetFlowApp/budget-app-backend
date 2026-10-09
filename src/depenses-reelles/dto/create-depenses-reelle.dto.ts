@@ -2,6 +2,10 @@ import { Type } from "class-transformer";
 import { IsIn, IsNumber, IsString, MaxLength, Min } from "class-validator";
 
 export class CreateDepensesReelleDto {
+    @Type(() => Number)
+    @IsNumber()
+    annee: number; 
+        
     @IsString()
     @MaxLength(25)
     mois: string; 

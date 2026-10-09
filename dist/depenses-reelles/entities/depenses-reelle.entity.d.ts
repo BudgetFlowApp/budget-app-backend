@@ -1,5 +1,6 @@
 export declare class DepensesReelle {
     idDepenseReelle: number;
+    annee: number;
     mois: string;
     type: string;
     categorie: string;

@@ -23,11 +23,12 @@ let DepensesPrevuesService = class DepensesPrevuesService {
     }
     async create(createDepensesPrevueDto) {
         const lastDepensePrevue = await this.depensesPrevuesRepository.findOneBy({
+            annee: createDepensesPrevueDto.annee,
             mois: createDepensesPrevueDto.mois,
-            sous_categorie: createDepensesPrevueDto.sous_categorie,
+            categorie: createDepensesPrevueDto.categorie,
         });
         if (lastDepensePrevue) {
-            throw new common_1.NotFoundException(`DepensePrevue with mois ${createDepensesPrevueDto.mois} and sous_categorie ${createDepensesPrevueDto.sous_categorie} already exists`);
+            throw new common_1.NotFoundException(`DepensePrevue with mois ${createDepensesPrevueDto.mois} and categorie ${createDepensesPrevueDto.categorie} already exists`);
         }
         const newDepensePrevue = this.depensesPrevuesRepository.create(createDepensesPrevueDto);
         return this.depensesPrevuesRepository.save(newDepensePrevue);
@@ -44,12 +45,26 @@ let DepensesPrevuesService = class DepensesPrevuesService {
         }
         return lastDepensePrevue;
     }
+    findByAnneeMoisCategorie(annee, mois, categorie) {
+        const lastDepensePrevue = this.depensesPrevuesRepository.findOneBy({
+            annee: annee,
+            mois: mois,
+            categorie: categorie
+        });
+        if (!lastDepensePrevue) {
+            throw new common_1.NotFoundException(`DepensePrevue with annee ${annee}, mois ${mois} and categorie ${categorie} not found`);
+        }
+        return lastDepensePrevue;
+    }
     async update(id, updateDepensesPrevueDto) {
         const depensePrevue = await this.depensesPrevuesRepository.findOneBy({
             idDepensePrevue: id
         });
         if (!depensePrevue) {
             throw new common_1.NotFoundException(`DepensePrevue with id ${id} not found`);
+        }
+        if (updateDepensesPrevueDto.annee !== undefined && updateDepensesPrevueDto.annee !== null) {
+            depensePrevue.annee = updateDepensesPrevueDto.annee;
         }
         if (updateDepensesPrevueDto.mois !== undefined && updateDepensesPrevueDto.mois !== '') {
             depensePrevue.mois = updateDepensesPrevueDto.mois;

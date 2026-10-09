@@ -20,6 +20,10 @@ __decorate([
 ], DepensesReelle.prototype, "idDepenseReelle", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
+    __metadata("design:type", Number)
+], DepensesReelle.prototype, "annee", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], DepensesReelle.prototype, "mois", void 0);
 __decorate([
@@ -39,7 +43,7 @@ __decorate([
     __metadata("design:type", String)
 ], DepensesReelle.prototype, "description", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
+    (0, typeorm_1.Column)('float'),
     __metadata("design:type", Number)
 ], DepensesReelle.prototype, "montant", void 0);
 exports.DepensesReelle = DepensesReelle = __decorate([

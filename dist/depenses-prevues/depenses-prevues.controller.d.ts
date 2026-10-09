@@ -8,6 +8,7 @@ export declare class DepensesPrevuesController {
     create(createDepensesPrevueDto: CreateDepensesPrevueDto): Promise<DepensesPrevue>;
     findAll(): Promise<DepensesPrevue[]>;
     findOne(id: number): Promise<DepensesPrevue>;
+    findByAnneeMoisCategorie(annee: number, mois: string, categorie: string): Promise<DepensesPrevue>;
     update(id: number, updateDepensesPrevueDto: UpdateDepensesPrevueDto): Promise<DepensesPrevue>;
     remove(id: number): Promise<DepensesPrevue>;
 }

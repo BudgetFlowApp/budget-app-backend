@@ -18,6 +18,11 @@ class UpdateRevenuDto extends (0, mapped_types_1.PartialType)(create_revenu_dto_
 }
 exports.UpdateRevenuDto = UpdateRevenuDto;
 __decorate([
+    (0, class_transformer_1.Type)(() => Number),
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], UpdateRevenuDto.prototype, "annee", void 0);
+__decorate([
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.MaxLength)(25),
     __metadata("design:type", String)

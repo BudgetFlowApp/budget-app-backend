@@ -1,4 +1,5 @@
 export declare class CreateDepensesPrevueDto {
+    annee: number;
     mois: string;
     categorie: string;
     type: string;
