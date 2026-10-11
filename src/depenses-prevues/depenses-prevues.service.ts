@@ -52,6 +52,16 @@ export class DepensesPrevuesService {
     return lastDepensePrevue;
   }
 
+  async findAllDepensesPrevuesByAnnee(annee: number): Promise<DepensesPrevue[]> {
+    const allDepensesPrevues = this.depensesPrevuesRepository.findBy({
+      annee: annee
+    })
+    if (!allDepensesPrevues) {
+      throw new NotFoundException(`DepensePrevues with annee ${annee} not found`);
+    }
+    return allDepensesPrevues;
+  }
+
   async update(id: number, updateDepensesPrevueDto: UpdateDepensesPrevueDto): Promise<DepensesPrevue> {
     const depensePrevue = await this.depensesPrevuesRepository.findOneBy({
       idDepensePrevue: id

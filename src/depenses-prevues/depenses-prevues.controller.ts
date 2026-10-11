@@ -28,6 +28,11 @@ export class DepensesPrevuesController {
     return this.depensesPrevuesService.findByAnneeMoisCategorie(annee, mois,categorie);
   }
 
+  @Get('annee/:annee')
+  findAllDepensesPrevuesByAnnee(@Param('annee') annee: number): Promise<DepensesPrevue[]> {
+    return this.depensesPrevuesService.findAllDepensesPrevuesByAnnee(annee);
+  }
+
   @Put(':id')
   update(@Param('id') id: number, @Body() updateDepensesPrevueDto: UpdateDepensesPrevueDto): Promise<DepensesPrevue> {
     return this.depensesPrevuesService.update(id, updateDepensesPrevueDto);

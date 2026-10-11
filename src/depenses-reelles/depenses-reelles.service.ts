@@ -47,6 +47,16 @@ export class DepensesReellesService {
     return lastDepenseReelle;
   }  
 
+  async findAllDepensesReellesByAnnee(annee: number): Promise<DepensesReelle[]> {
+    const AllDepensesReelles = this.depensesReellesRepository.findBy({
+      annee: annee
+    })
+    if (!AllDepensesReelles) {
+      throw new NotFoundException(`DepenseReelles with annee ${annee} not found`);
+    }
+    return AllDepensesReelles;
+  }
+
   async update(id: number, updateDepensesReelleDto: UpdateDepensesReelleDto): Promise<DepensesReelle> {
     const depenseReelle = await this.depensesReellesRepository.findOneBy({
       idDepenseReelle: id

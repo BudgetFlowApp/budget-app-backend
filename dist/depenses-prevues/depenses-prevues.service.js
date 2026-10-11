@@ -56,6 +56,15 @@ let DepensesPrevuesService = class DepensesPrevuesService {
         }
         return lastDepensePrevue;
     }
+    async findAllDepensesPrevuesByAnnee(annee) {
+        const allDepensesPrevues = this.depensesPrevuesRepository.findBy({
+            annee: annee
+        });
+        if (!allDepensesPrevues) {
+            throw new common_1.NotFoundException(`DepensePrevues with annee ${annee} not found`);
+        }
+        return allDepensesPrevues;
+    }
     async update(id, updateDepensesPrevueDto) {
         const depensePrevue = await this.depensesPrevuesRepository.findOneBy({
             idDepensePrevue: id

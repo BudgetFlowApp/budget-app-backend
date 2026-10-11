@@ -52,6 +52,15 @@ let DepensesReellesService = class DepensesReellesService {
         }
         return lastDepenseReelle;
     }
+    async findAllDepensesReellesByAnnee(annee) {
+        const AllDepensesReelles = this.depensesReellesRepository.findBy({
+            annee: annee
+        });
+        if (!AllDepensesReelles) {
+            throw new common_1.NotFoundException(`DepenseReelles with annee ${annee} not found`);
+        }
+        return AllDepensesReelles;
+    }
     async update(id, updateDepensesReelleDto) {
         const depenseReelle = await this.depensesReellesRepository.findOneBy({
             idDepenseReelle: id
