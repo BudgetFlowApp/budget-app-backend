@@ -33,11 +33,14 @@ let DepensesReellesController = class DepensesReellesController {
     findByAnneeMoisCategorie(annee, mois, categorie) {
         return this.depensesReellesService.findByAnneeMoisCategorie(annee, mois, categorie);
     }
-    findAllDepensesReellesByAnnee(annee) {
-        return this.depensesReellesService.findAllDepensesReellesByAnnee(annee);
+    findAllDepensesReellesByAnneeMois(annee, mois) {
+        return this.depensesReellesService.findAllDepensesReellesByAnneeMois(annee, mois);
     }
     update(id, updateDepensesReelleDto) {
         return this.depensesReellesService.update(id, updateDepensesReelleDto);
+    }
+    sumByCatgeorie(annee, mois) {
+        return this.depensesReellesService.sumByCatgeorie(annee, mois);
     }
     remove(id) {
         return this.depensesReellesService.remove(id);
@@ -74,12 +77,13 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], DepensesReellesController.prototype, "findByAnneeMoisCategorie", null);
 __decorate([
-    (0, common_1.Get)('annee/:annee'),
+    (0, common_1.Get)('annee-mois/:annee/:mois'),
     __param(0, (0, common_1.Param)('annee')),
+    __param(1, (0, common_1.Param)('mois')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number]),
+    __metadata("design:paramtypes", [Number, String]),
     __metadata("design:returntype", Promise)
-], DepensesReellesController.prototype, "findAllDepensesReellesByAnnee", null);
+], DepensesReellesController.prototype, "findAllDepensesReellesByAnneeMois", null);
 __decorate([
     (0, common_1.Put)(':id'),
     __param(0, (0, common_1.Param)('id')),
@@ -88,6 +92,14 @@ __decorate([
     __metadata("design:paramtypes", [Number, update_depenses_reelle_dto_1.UpdateDepensesReelleDto]),
     __metadata("design:returntype", Promise)
 ], DepensesReellesController.prototype, "update", null);
+__decorate([
+    (0, common_1.Get)('total-by-categorie/:annee/:mois'),
+    __param(0, (0, common_1.Param)('annee')),
+    __param(1, (0, common_1.Param)('mois')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number, String]),
+    __metadata("design:returntype", Promise)
+], DepensesReellesController.prototype, "sumByCatgeorie", null);
 __decorate([
     (0, common_1.Delete)(':id'),
     __param(0, (0, common_1.Param)('id')),

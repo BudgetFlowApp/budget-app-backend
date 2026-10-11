@@ -30,6 +30,9 @@ let RevenusController = class RevenusController {
     findOne(id) {
         return this.revenusService.findOne(id);
     }
+    sumAllRevenus(annee, mois) {
+        return this.revenusService.sumAllRevenus(annee, mois);
+    }
     update(id, updateRevenuDto) {
         return this.revenusService.update(id, updateRevenuDto);
     }
@@ -58,6 +61,14 @@ __decorate([
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
 ], RevenusController.prototype, "findOne", null);
+__decorate([
+    (0, common_1.Get)('sum-all-revenus/:annee/:mois'),
+    __param(0, (0, common_1.Param)('annee')),
+    __param(1, (0, common_1.Param)('mois')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number, String]),
+    __metadata("design:returntype", Promise)
+], RevenusController.prototype, "sumAllRevenus", null);
 __decorate([
     (0, common_1.Put)(':id'),
     __param(0, (0, common_1.Param)('id')),

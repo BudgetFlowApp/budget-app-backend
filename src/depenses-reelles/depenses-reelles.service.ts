@@ -11,16 +11,16 @@ export class DepensesReellesService {
     @InjectRepository(DepensesReelle) private readonly depensesReellesRepository: Repository<DepensesReelle>,
   ) {}  
   async create(createDepensesReelleDto: CreateDepensesReelleDto): Promise<DepensesReelle> {
-    const lastDepenseReelle = await this.depensesReellesRepository.findOneBy({
-      annee: createDepensesReelleDto.annee,
-      mois: createDepensesReelleDto.mois,
-      categorie: createDepensesReelleDto.categorie,
-    });
-    if (lastDepenseReelle) {
-      throw new NotFoundException(
-        `DepensePrevue with mois ${createDepensesReelleDto.mois} and categorie ${createDepensesReelleDto.categorie} already exists`,
-      );    
-    } 
+    // const lastDepenseReelle = await this.depensesReellesRepository.findOneBy({
+    //   annee: createDepensesReelleDto.annee,
+    //   mois: createDepensesReelleDto.mois,
+    //   categorie: createDepensesReelleDto.categorie,
+    // });
+    // if (lastDepenseReelle) {
+    //   throw new NotFoundException(
+    //     `DepensePrevue with mois ${createDepensesReelleDto.mois} and categorie ${createDepensesReelleDto.categorie} already exists`,
+    //   );    
+    // } 
     const newDepenseReelle = this.depensesReellesRepository.create(createDepensesReelleDto);
     return this.depensesReellesRepository.save(newDepenseReelle);
   }
@@ -47,12 +47,13 @@ export class DepensesReellesService {
     return lastDepenseReelle;
   }  
 
-  async findAllDepensesReellesByAnnee(annee: number): Promise<DepensesReelle[]> {
+  async findAllDepensesReellesByAnneeMois(annee: number, mois: string): Promise<DepensesReelle[]> {
     const AllDepensesReelles = this.depensesReellesRepository.findBy({
-      annee: annee
+      annee: annee,
+      mois: mois
     })
     if (!AllDepensesReelles) {
-      throw new NotFoundException(`DepenseReelles with annee ${annee} not found`);
+      throw new NotFoundException(`DepenseReelles with annee ${annee} and mois ${mois} not found`);
     }
     return AllDepensesReelles;
   }
@@ -88,6 +89,23 @@ export class DepensesReellesService {
       depenseReelle.montant = updateDepensesReelleDto.montant;
     }   
     return this.depensesReellesRepository.save(depenseReelle);         
+  }
+
+  async sumByCatgeorie(annee: number, mois: string): Promise<Record<string, number>> {
+    const allDepensesReelles = await this.depensesReellesRepository.findBy({
+      annee: annee,
+      mois: mois
+    });
+    
+    const totauxByCategorie = allDepensesReelles.reduce<Record<string, number>>(
+      (totaux, depense) => {
+        const categorie = depense.categorie;
+        totaux[categorie] = (totaux[categorie] || 0) + depense.montant;
+        return totaux;
+      },
+      {}
+    );
+    return totauxByCategorie;
   }
 
   async remove(id: number): Promise<DepensesReelle> {

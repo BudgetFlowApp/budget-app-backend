@@ -8,6 +8,7 @@ export declare class RevenusController {
     create(createRevenuDto: CreateRevenuDto): Promise<Revenu>;
     findAll(): Promise<Revenu[]>;
     findOne(id: number): Promise<Revenu>;
+    sumAllRevenus(annee: number, mois: string): Promise<number>;
     update(id: number, updateRevenuDto: UpdateRevenuDto): Promise<Revenu>;
     remove(id: number): Promise<Revenu>;
 }

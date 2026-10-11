@@ -23,6 +23,11 @@ export class RevenusController {
     return this.revenusService.findOne(id);
   }
 
+  @Get('sum-all-revenus/:annee/:mois')
+  sumAllRevenus(@Param('annee') annee: number, @Param('mois') mois: string): Promise<number> {
+    return this.revenusService.sumAllRevenus(annee, mois);
+  }
+
   @Put(':id')
   update(@Param('id') id: number, @Body() updateRevenuDto: UpdateRevenuDto): Promise<Revenu> {
     return this.revenusService.update(id, updateRevenuDto);

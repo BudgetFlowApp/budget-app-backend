@@ -28,14 +28,19 @@ export class DepensesReellesController {
     return this.depensesReellesService.findByAnneeMoisCategorie(annee, mois, categorie);
   }
 
-  @Get('annee/:annee')
-  findAllDepensesReellesByAnnee(@Param('annee') annee: number): Promise<DepensesReelle[]> {
-    return this.depensesReellesService.findAllDepensesReellesByAnnee(annee);
+  @Get('annee-mois/:annee/:mois')
+  findAllDepensesReellesByAnneeMois(@Param('annee') annee: number, @Param('mois') mois: string): Promise<DepensesReelle[]> {
+    return this.depensesReellesService.findAllDepensesReellesByAnneeMois(annee, mois);
   }
 
   @Put(':id')
   update(@Param('id') id: number, @Body() updateDepensesReelleDto: UpdateDepensesReelleDto): Promise<DepensesReelle> {
     return this.depensesReellesService.update(id, updateDepensesReelleDto);
+  }
+
+  @Get('total-by-categorie/:annee/:mois')
+  sumByCatgeorie(@Param('annee') annee: number, @Param('mois') mois: string): Promise<Record<string, number>> {
+    return this.depensesReellesService.sumByCatgeorie(annee, mois);
   }
 
   @Delete(':id')

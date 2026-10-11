@@ -22,19 +22,11 @@ let RevenusService = class RevenusService {
         this.revenuRepository = revenuRepository;
     }
     async create(createRevenuDto) {
-        const lastRevenu = await this.revenuRepository.findOneBy({
-            annee: createRevenuDto.annee,
-            mois: createRevenuDto.mois,
-            sous_categorie: createRevenuDto.sous_categorie,
-        });
-        if (lastRevenu) {
-            throw new common_1.NotFoundException(`Revenu with mois ${createRevenuDto.mois} and sous_categorie ${createRevenuDto.sous_categorie} already exists`);
-        }
-        const newRevenu = this.revenuRepository.create(createRevenuDto);
+        const newRevenu = await this.revenuRepository.create(createRevenuDto);
         return this.revenuRepository.save(newRevenu);
     }
     async findAll() {
-        return this.revenuRepository.find();
+        return await this.revenuRepository.find();
     }
     async findOne(id) {
         const revenu = await this.revenuRepository.findOneBy({
@@ -44,6 +36,14 @@ let RevenusService = class RevenusService {
             throw new common_1.NotFoundException(`Revenu with id ${id} not found`);
         }
         return revenu;
+    }
+    async sumAllRevenus(annee, mois) {
+        const allRevenus = await this.revenuRepository.findBy({
+            annee: annee,
+            mois: mois
+        });
+        const totalRevenus = allRevenus.reduce((total, revenu) => total = total + revenu.montant, 0);
+        return totalRevenus;
     }
     async update(id, updateRevenuDto) {
         const revenu = await this.revenuRepository.findOneBy({

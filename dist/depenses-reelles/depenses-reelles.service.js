@@ -22,14 +22,6 @@ let DepensesReellesService = class DepensesReellesService {
         this.depensesReellesRepository = depensesReellesRepository;
     }
     async create(createDepensesReelleDto) {
-        const lastDepenseReelle = await this.depensesReellesRepository.findOneBy({
-            annee: createDepensesReelleDto.annee,
-            mois: createDepensesReelleDto.mois,
-            categorie: createDepensesReelleDto.categorie,
-        });
-        if (lastDepenseReelle) {
-            throw new common_1.NotFoundException(`DepensePrevue with mois ${createDepensesReelleDto.mois} and categorie ${createDepensesReelleDto.categorie} already exists`);
-        }
         const newDepenseReelle = this.depensesReellesRepository.create(createDepensesReelleDto);
         return this.depensesReellesRepository.save(newDepenseReelle);
     }
@@ -52,12 +44,13 @@ let DepensesReellesService = class DepensesReellesService {
         }
         return lastDepenseReelle;
     }
-    async findAllDepensesReellesByAnnee(annee) {
+    async findAllDepensesReellesByAnneeMois(annee, mois) {
         const AllDepensesReelles = this.depensesReellesRepository.findBy({
-            annee: annee
+            annee: annee,
+            mois: mois
         });
         if (!AllDepensesReelles) {
-            throw new common_1.NotFoundException(`DepenseReelles with annee ${annee} not found`);
+            throw new common_1.NotFoundException(`DepenseReelles with annee ${annee} and mois ${mois} not found`);
         }
         return AllDepensesReelles;
     }
@@ -90,6 +83,18 @@ let DepensesReellesService = class DepensesReellesService {
             depenseReelle.montant = updateDepensesReelleDto.montant;
         }
         return this.depensesReellesRepository.save(depenseReelle);
+    }
+    async sumByCatgeorie(annee, mois) {
+        const allDepensesReelles = await this.depensesReellesRepository.findBy({
+            annee: annee,
+            mois: mois
+        });
+        const totauxByCategorie = allDepensesReelles.reduce((totaux, depense) => {
+            const categorie = depense.categorie;
+            totaux[categorie] = (totaux[categorie] || 0) + depense.montant;
+            return totaux;
+        }, {});
+        return totauxByCategorie;
     }
     async remove(id) {
         const depenseReelle = await this.depensesReellesRepository.findOneBy({
