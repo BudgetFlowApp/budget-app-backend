@@ -52,12 +52,13 @@ export class DepensesPrevuesService {
     return lastDepensePrevue;
   }
 
-  async findAllDepensesPrevuesByAnnee(annee: number): Promise<DepensesPrevue[]> {
+  async findAllDepensesPrevuesByAnneeMois(annee: number, mois: string): Promise<DepensesPrevue[]> {
     const allDepensesPrevues = this.depensesPrevuesRepository.findBy({
-      annee: annee
+      annee: annee,
+      mois: mois
     })
     if (!allDepensesPrevues) {
-      throw new NotFoundException(`DepensePrevues with annee ${annee} not found`);
+      throw new NotFoundException(`DepensePrevues with annee ${annee} and ${mois} not found`);
     }
     return allDepensesPrevues;
   }

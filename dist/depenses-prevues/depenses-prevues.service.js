@@ -56,12 +56,13 @@ let DepensesPrevuesService = class DepensesPrevuesService {
         }
         return lastDepensePrevue;
     }
-    async findAllDepensesPrevuesByAnnee(annee) {
+    async findAllDepensesPrevuesByAnneeMois(annee, mois) {
         const allDepensesPrevues = this.depensesPrevuesRepository.findBy({
-            annee: annee
+            annee: annee,
+            mois: mois
         });
         if (!allDepensesPrevues) {
-            throw new common_1.NotFoundException(`DepensePrevues with annee ${annee} not found`);
+            throw new common_1.NotFoundException(`DepensePrevues with annee ${annee} and ${mois} not found`);
         }
         return allDepensesPrevues;
     }
