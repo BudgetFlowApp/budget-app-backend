@@ -10,6 +10,7 @@ export declare class DepensesReellesService {
     findOne(id: number): Promise<DepensesReelle>;
     findByAnneeMoisCategorie(annee: number, mois: string, categorie: string): Promise<DepensesReelle>;
     findAllDepensesReellesByAnneeMois(annee: number, mois: string): Promise<DepensesReelle[]>;
+    findAllCategories(annee: number, mois: string): Promise<string[]>;
     update(id: number, updateDepensesReelleDto: UpdateDepensesReelleDto): Promise<DepensesReelle>;
     sumByCatgeorie(annee: number, mois: string): Promise<Record<string, number>>;
     remove(id: number): Promise<DepensesReelle>;

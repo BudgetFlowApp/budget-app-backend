@@ -48,7 +48,7 @@ export class DepensesReellesService {
   }  
 
   async findAllDepensesReellesByAnneeMois(annee: number, mois: string): Promise<DepensesReelle[]> {
-    const AllDepensesReelles = this.depensesReellesRepository.findBy({
+    const AllDepensesReelles = await this.depensesReellesRepository.findBy({
       annee: annee,
       mois: mois
     })
@@ -56,6 +56,20 @@ export class DepensesReellesService {
       throw new NotFoundException(`DepenseReelles with annee ${annee} and mois ${mois} not found`);
     }
     return AllDepensesReelles;
+  }
+
+  async findAllCategories(annee: number, mois: string): Promise<string[]> {
+    const AllDepensesReelles = await this.depensesReellesRepository.findBy({
+      annee: annee,
+      mois: mois
+    })    
+    if (!AllDepensesReelles) {
+      throw new NotFoundException(`DepenseReelles with annee ${annee} and mois ${mois} not found`);
+    }
+    const categories = [
+      ...new Set(AllDepensesReelles.map(depense => depense.categorie))
+    ];
+    return categories;
   }
 
   async update(id: number, updateDepensesReelleDto: UpdateDepensesReelleDto): Promise<DepensesReelle> {

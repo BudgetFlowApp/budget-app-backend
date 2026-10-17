@@ -33,6 +33,11 @@ export class DepensesReellesController {
     return this.depensesReellesService.findAllDepensesReellesByAnneeMois(annee, mois);
   }
 
+  @Get('all-categories-reelles/:annee/:mois')
+  findAllCategories(@Param('annee') annee: number, @Param('mois') mois: string): Promise<string[]> {
+    return this.depensesReellesService.findAllCategories(annee, mois);
+  }
+
   @Put(':id')
   update(@Param('id') id: number, @Body() updateDepensesReelleDto: UpdateDepensesReelleDto): Promise<DepensesReelle> {
     return this.depensesReellesService.update(id, updateDepensesReelleDto);
