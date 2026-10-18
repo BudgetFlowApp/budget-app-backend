@@ -33,6 +33,11 @@ export class DepensesPrevuesController {
     return this.depensesPrevuesService.findAllDepensesPrevuesByAnneeMois(annee, mois);
   }
 
+  @Get('all-categories-prevues/:annee/:mois')
+  findAllCategories(@Param('annee') annee: number, @Param('mois') mois: string): Promise<string[]> {
+    return this.depensesPrevuesService.findAllCategories(annee, mois);
+  }  
+
   @Put(':id')
   update(@Param('id') id: number, @Body() updateDepensesPrevueDto: UpdateDepensesPrevueDto): Promise<DepensesPrevue> {
     return this.depensesPrevuesService.update(id, updateDepensesPrevueDto);

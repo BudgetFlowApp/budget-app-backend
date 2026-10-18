@@ -10,6 +10,7 @@ export declare class DepensesPrevuesService {
     findOne(id: number): Promise<DepensesPrevue>;
     findByAnneeMoisCategorie(annee: number, mois: string, categorie: string): Promise<DepensesPrevue>;
     findAllDepensesPrevuesByAnneeMois(annee: number, mois: string): Promise<DepensesPrevue[]>;
+    findAllCategories(annee: number, mois: string): Promise<string[]>;
     update(id: number, updateDepensesPrevueDto: UpdateDepensesPrevueDto): Promise<DepensesPrevue>;
     remove(id: number): Promise<DepensesPrevue>;
 }

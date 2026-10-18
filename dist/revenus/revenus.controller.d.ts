@@ -9,6 +9,7 @@ export declare class RevenusController {
     findAll(): Promise<Revenu[]>;
     findOne(id: number): Promise<Revenu>;
     sumAllRevenus(annee: number, mois: string): Promise<number>;
+    findAllCategories(annee: number, mois: string): Promise<string[]>;
     update(id: number, updateRevenuDto: UpdateRevenuDto): Promise<Revenu>;
     remove(id: number): Promise<Revenu>;
 }

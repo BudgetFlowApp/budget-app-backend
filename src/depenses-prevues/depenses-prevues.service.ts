@@ -63,6 +63,20 @@ export class DepensesPrevuesService {
     return allDepensesPrevues;
   }
 
+  async findAllCategories(annee: number, mois: string): Promise<string[]> {
+    const AllDepensesPrevues = await this.depensesPrevuesRepository.findBy({
+      annee: annee,
+      mois: mois
+    })    
+    if (!AllDepensesPrevues) {
+      throw new NotFoundException(`DepensePrevues with annee ${annee} and mois ${mois} not found`);
+    }
+    const categories = [
+      ...new Set(AllDepensesPrevues.map(depense => depense.categorie))
+    ];
+    return categories;
+  }  
+
   async update(id: number, updateDepensesPrevueDto: UpdateDepensesPrevueDto): Promise<DepensesPrevue> {
     const depensePrevue = await this.depensesPrevuesRepository.findOneBy({
       idDepensePrevue: id

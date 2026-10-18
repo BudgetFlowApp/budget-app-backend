@@ -45,6 +45,19 @@ let RevenusService = class RevenusService {
         const totalRevenus = allRevenus.reduce((total, revenu) => total = total + revenu.montant, 0);
         return totalRevenus;
     }
+    async findAllCategories(annee, mois) {
+        const AllRevenus = await this.revenuRepository.findBy({
+            annee: annee,
+            mois: mois
+        });
+        if (!AllRevenus) {
+            throw new common_1.NotFoundException(`AllRevenus with annee ${annee} and mois ${mois} not found`);
+        }
+        const categories = [
+            ...new Set(AllRevenus.map(revenu => revenu.categorie))
+        ];
+        return categories;
+    }
     async update(id, updateRevenuDto) {
         const revenu = await this.revenuRepository.findOneBy({
             idRevenu: id,

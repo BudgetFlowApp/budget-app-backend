@@ -41,7 +41,7 @@ export class RevenusService {
     return revenu;
   }
 
-  async sumAllRevenus(annee, mois): Promise<number> {
+  async sumAllRevenus(annee: number, mois: string): Promise<number> {
     const allRevenus = await this.revenuRepository.findBy({
       annee: annee,
       mois: mois
@@ -51,6 +51,20 @@ export class RevenusService {
       (total, revenu) => total = total + revenu.montant, 0
     );
     return totalRevenus;
+  }
+
+  async findAllCategories(annee: number, mois: string): Promise<string[]> {
+    const AllRevenus = await this.revenuRepository.findBy({
+      annee: annee,
+      mois: mois
+    })    
+    if (!AllRevenus) {
+      throw new NotFoundException(`AllRevenus with annee ${annee} and mois ${mois} not found`);
+    }
+    const categories = [
+      ...new Set(AllRevenus.map(revenu => revenu.categorie))
+    ];
+    return categories;
   }
 
   async update(id: number, updateRevenuDto: UpdateRevenuDto): Promise<Revenu> {
